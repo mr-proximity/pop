@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Speed Controlled Video with Flip Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 200vh; /* Two pages */
+            overflow-x: hidden;
+        }
+        .video-container1 {
+            position: fixed; /* Make it cover the entire viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .content1 {
+            position: relative;
+            height: 100vh;
+        }
+
+        /* Flip Card Section - Appears on the second page */
+        .card-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-container {
+            display: flex;
+            gap: 5vw;
+            perspective: 1000px;
+            width: 90vw; /* Adjusted for larger cards */
+            justify-content: center;
+        }
+        .card { 
+            scale: 110%;
+            width: 50vw;
+            max-width: 650px;
+            height: 62.5vh;
+            max-height: 750px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateY(180deg); /* Start at 180° so it's correct */
+            transition: transform 0.8s ease-out;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .text-overlay {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 8px 12px;
+            font-size: 2.5vw;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-container1">
+        <video id="background-video" autoplay loop muted>
+            <source src="crown1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Empty First Page -->
+    <div class="content1"></div>
+
+    <!-- Flip Cards on Second Page -->
+    <div class="card-section">
+        <div class="card-container">
+            <div class="card" id="card1">
+                <img src="startup.jpg" alt="Startup">
+            </div>
+            <div class="card" id="card2">
+                <img src="extranet.jpg" alt="Extranet">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById("background-video");
+        const card1 = document.getElementById("card1");
+        const card2 = document.getElementById("card2");
+    
+        let lastScrollY = window.scrollY;
+        let lastTime = performance.now();
+    
+        window.addEventListener("scroll", () => {
+            let currentScrollY = window.scrollY;
+            let currentTime = performance.now();
+            let scrollSpeed = Math.abs(currentScrollY - lastScrollY) / (currentTime - lastTime);
+    
+            // Adjust video speed dynamically (clamp between 0.5x and 4x)
+            video.playbackRate = Math.min(Math.max(scrollSpeed * 3, 0.5), 4);
+    
+            // Get total document height
+            let totalHeight = document.body.scrollHeight - window.innerHeight;
+    
+            // Normalize the rotation from 180° (top) to 0° (bottom)
+            let rotation = 180 - (currentScrollY / totalHeight) * 180;
+    
+            // Apply rotation smoothly
+            card1.style.transform = `rotateY(${rotation}deg)`;
+            card2.style.transform = `rotateY(${rotation}deg)`;
+    
+            lastScrollY = currentScrollY;
+            lastTime = currentTime;
+        });
+    </script>
+
+
+
+
+</body>
+</html>

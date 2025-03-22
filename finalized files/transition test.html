@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Hover</title>
+    <style>
+        body {
+            background-color: #e5e5e5;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 1920px;
+            height: 1080px;
+        }
+        /* Main Text Image */
+        .text-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1920px;
+            height: 1080px;
+        }
+        /* Hover Images (initially hidden) */
+        .hover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1920px;
+            height: 1080px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 1s ease; /* Increased transition time for smoother fade-in and fade-out */
+        }
+        .hover-image.blue {
+            background-image: url('blue.png');
+        }
+        .hover-image.green {
+            background-image: url('green.png');
+        }
+        .hover-image.red {
+            background-image: url('red.png');
+        }
+        /* Hover Areas based on provided coordinates */
+        .hover-area {
+            position: absolute;
+            cursor: pointer;
+        }
+        /* Blue box area - increased size by 10% */
+        .blue-box {
+            top: 500px;
+            left: 1020px;
+            width: 847px; /* Increased width by 10% */
+            height: 144px; /* Increased height by 10% */
+        }
+        /* Green box area - increased size by 10% */
+        .green-box {
+            top: 605px;
+            left: 41px;
+            width: 964px; /* Increased width by 10% */
+            height: 116px; /* Increased height by 10% */
+        }
+        /* Red box area - increased size by 10% */
+        .red-box {
+            top: 831px;
+            left: 985px;
+            width: 556px; /* Increased width by 10% */
+            height: 121px; /* Increased height by 10% */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main Text Image -->
+        <img class="text-image" src="page2text.png" alt="Text">
+        
+        <!-- Hoverable Areas -->
+        <div class="hover-area blue-box" onmouseenter="showImage('blue')" onmouseleave="hideImage('blue')"></div>
+        <div class="hover-area green-box" onmouseenter="showImage('green')" onmouseleave="hideImage('green')"></div>
+        <div class="hover-area red-box" onmouseenter="showImage('red')" onmouseleave="hideImage('red')"></div>
+        
+        <!-- Hover Images -->
+        <div class="hover-image blue"></div>
+        <div class="hover-image green"></div>
+        <div class="hover-image red"></div>
+    </div>
+
+    <script>
+        let currentHovered = null;
+
+        function showImage(color) {
+            // If the color is already the one being displayed, don't do anything
+            if (currentHovered === color) return;
+
+            // Hide all hover images first
+            document.querySelectorAll('.hover-image').forEach(function(image) {
+                image.style.visibility = 'hidden';
+                image.style.opacity = 0; // Ensure it's hidden with opacity before showing again
+            });
+
+            // Show the corresponding image and add fade-in effect
+            const image = document.querySelector(`.hover-image.${color}`);
+            image.style.visibility = 'visible';
+
+            // Use a short timeout to trigger the fade-in effect
+            setTimeout(function() {
+                image.style.opacity = 1;
+            }, 10); // Allow a brief delay for visibility change
+
+            currentHovered = color; // Mark this color as currently hovered
+        }
+
+        function hideImage(color) {
+            // Only fade out if the color is the one currently being displayed
+            if (currentHovered !== color) return;
+
+            // Fade out the hover images smoothly
+            const image = document.querySelector(`.hover-image.${color}`);
+            image.style.opacity = 0; // Fade out
+
+            // Delay the visibility change to allow opacity to complete
+            setTimeout(function() {
+                image.style.visibility = 'hidden';
+                currentHovered = null; // Reset the hovered color once the image is hidden
+            }, 1000); // Wait for the opacity transition (1s) before hiding the image
+        }
+    </script>
+</body>
+</html>

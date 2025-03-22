@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wokine Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+        body { margin-top: 100px;
+            background-color: #111;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 800px;
+            justify-content: space-between;
+        }
+        .quote {
+    font-size: 18px;
+    margin-top: 20px;
+    opacity: 0.8;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+        .container { margin-top: 100px;
+            display: flex;
+            justify-content: space-between;
+            padding: 50px;
+            flex-wrap: wrap;
+        }
+
+        .left-content {
+            max-width: 50%;
+        }
+
+        .left-content h1 {
+            font-size: 32px;
+            font-weight: 600;
+        }
+
+        .quote {
+            font-size: 18px;
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+
+        .video-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 300px;
+            height: auto;
+            transition: opacity 0.3s;
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .video-container:hover .video-overlay {
+            opacity: 1;
+        }
+
+        .right-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: left;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        /* Email input styling */
+        input[type="email"] {
+            background: none;
+            border: none;
+            border-bottom: 1px solid #fff;
+            color: #fff;
+            padding: 5px;
+            width: 100%;
+            max-width: 200px;
+            outline: none;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            font-size: 24px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        /* Hover effect for Learn More section */
+        .learn-more a:hover,
+        .social-icons a:hover {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .learn-more a:not(:hover),
+        .social-icons a:not(:hover) {
+            transform: scale(0.8);
+            opacity: 0.6;
+        }
+
+        /* SVG styles */
+        .svg-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-content">
+            <h1>Popin designs digital solutions and experiences that combine creativity, technology and ethical commitment.</h1>
+            <p class="quote">“The best way to predict the future is to create it.”</p>
+            
+        </div>
+        
+        <div class="right-content">
+            <div class="column learn-more">
+                <h4>LEARN MORE</h4>
+                <a href="#">Our approach</a>
+                <a href="#">Our expertise</a>
+                <a href="#">CSR approach</a>
+                <a href="#">To apply</a>
+            </div>
+            
+            <div class="column">
+                <h4>GO FURTHER</h4>
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
+                    </svg>
+                    1 percent
+                </a>
+            </div>
+
+            <div class="column">
+                <h4>MANAGE YOUR PROJECT</h4>
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 16 16">
+                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+                    </svg>
+                    Extranet Access
+                </a>
+            </div>
+
+            <div class="column">
+                <h4>NEWSLETTER</h4>
+                <input type="email" placeholder="Your email">
+            </div>
+
+            <div class="column">
+                <h4>CONTACT</h4>
+                <p>22 rue Basse<br>59000 Lille<br>France</p>
+                <p>T +33 (0)3 20 88 11 59</p>
+            </div>
+            
+            <div class="column">
+                <h4>FOLLOW US ON OUR SOCIAL NETWORKS</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/mr.proximity" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-behance"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="showcase-reel.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay">Play Showreel</div>
+    </div>
+</body>
+</html>

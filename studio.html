@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Speed Controlled Video</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 300vh; /* Increase scroll area */
+            overflow-x: hidden;
+        }
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .content {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            color: white;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <video id="background-video" autoplay loop muted>
+            <source src="crown1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="content">
+        <p>Scroll to see the effect...</p>
+        <p>Keep scrolling down to speed up the video, and scroll up to slow it down.</p>
+    </div>
+
+    <script>
+        const video = document.getElementById("background-video");
+
+        let lastScrollY = window.scrollY;
+        let lastTime = performance.now();
+        
+        window.addEventListener("scroll", () => {
+            let currentScrollY = window.scrollY;
+            let currentTime = performance.now();
+            let scrollSpeed = Math.abs(currentScrollY - lastScrollY) / (currentTime - lastTime);
+
+            // Adjust video speed dynamically (clamp between 0.5x and 4x)
+            video.playbackRate = Math.min(Math.max(scrollSpeed * 3, 0.5), 4);
+
+            lastScrollY = currentScrollY;
+            lastTime = currentTime;
+        });
+    </script>
+
+</body>
+</html>
